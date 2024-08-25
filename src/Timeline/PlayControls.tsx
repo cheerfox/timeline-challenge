@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { TimeInput } from "./components/TimeInput";
 
 type PlayControlsProps = {
   time: number;
@@ -7,13 +7,9 @@ type PlayControlsProps = {
 
 export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
   // TODO: implement time <= maxTime
-
-  const onTimeChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTime(Number(e.target.value));
-    },
-    [setTime],
-  );
+  const handleTimeChange = (time: number) => {
+    setTime(time);
+  };
 
   return (
     <div
@@ -21,17 +17,17 @@ export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
  px-2"
       data-testid="play-controls"
     >
+      {/* Input logic extract to child component */}
       <fieldset className="flex gap-1">
         Current
-        <input
-          className="bg-gray-700 px-1 rounded"
-          type="number"
-          data-testid="time"
+        <TimeInput
+          dataTestid="time"
           min={0}
           max={2000}
           step={10}
-          value={time}
-          onChange={onTimeChange}
+          defaultValue={0}
+          time={time}
+          onTimeChange={handleTimeChange}
         />
       </fieldset>
       -
