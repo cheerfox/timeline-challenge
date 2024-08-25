@@ -1,15 +1,29 @@
+import { useEffect } from "react";
 import { NumberInputField } from "./components/NumberInputField";
 
 type PlayControlsProps = {
   time: number;
   setTime: (time: number) => void;
+  duration: number;
+  setDuration: (duration: number) => void;
 };
 
-export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
+export const PlayControls = ({ time, setTime, duration, setDuration }: PlayControlsProps) => {
   // TODO: implement time <= maxTime
   const handleTimeChange = (time: number) => {
     setTime(time);
   };
+
+  const handleDurationChange = (duration: number) => {
+    setDuration(duration);
+  };
+
+  useEffect(() => {
+    if (time > duration) {
+      
+      setTime(duration);
+    }
+  }, [time, duration, setTime]);
 
   return (
     <div
@@ -23,7 +37,7 @@ export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
         <NumberInputField
           dataTestid="time"
           min={0}
-          max={2000}
+          max={duration}
           step={10}
           defaultValue={0}
           time={time}
@@ -32,14 +46,14 @@ export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
       </fieldset>
       -
       <fieldset className="flex gap-1">
-        <input
-          className="bg-gray-700 px-1 rounded"
-          type="number"
-          data-testid="max-time"
+        <NumberInputField
+          dataTestid="max-time"
           min={100}
-          max={2000}
+          max={6000}
           step={10}
           defaultValue={2000}
+          time={duration}
+          onChange={handleDurationChange}
         />
         Duration
       </fieldset>

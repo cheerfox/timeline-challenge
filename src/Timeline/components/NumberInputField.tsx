@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { roundIfDecimal, roundToNearestStep } from "../../utils";
 
 interface NumberInputField {
   dataTestid: string;
@@ -17,10 +18,6 @@ const KEY = {
   ESCAPE: "Escape",
 };
 
-const roundIfDecimal = (value: number) => {
-  return Number.isInteger(value) ? value : Math.round(value);
-};
-
 export const NumberInputField = ({
   dataTestid,
   min,
@@ -32,10 +29,17 @@ export const NumberInputField = ({
 }: NumberInputField) => {
   const [draft, setDraft] = useState<string>(defaultValue.toString());
 
+  useEffect(() => {
+    if (time.toString() !== draft) {
+      setDraft(time.toString());
+    }
+  }, [time]);
+
   const validateTime = (time: number): number => {
-    if (time < 0) return 0;
+    if (time < 0) return min;
+    if (time < min) return min;
     if (time > max) return max;
-    const formattedTime = roundIfDecimal(time);
+    const formattedTime = roundToNearestStep(roundIfDecimal(time), step);
 
     return formattedTime;
   };
@@ -53,13 +57,10 @@ export const NumberInputField = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("onChange", e.target.value);
-
     setDraft(e.target.value);
 
     // handle click step button
     if (!(e.nativeEvent as InputEvent).inputType) {
-      console.log(e.nativeEvent);
       confirmTime(e.target.value);
     }
   };
@@ -72,13 +73,10 @@ export const NumberInputField = ({
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log("blur", e);
-
     confirmTime(e.target.value);
   };
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.key);
     const target = e.target as HTMLInputElement;
 
     switch (e.key) {
