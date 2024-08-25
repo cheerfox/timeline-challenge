@@ -1,4 +1,4 @@
-import { TimeInput } from "./components/TimeInput";
+import { NumberInputField } from "./components/NumberInputField";
 
 type PlayControlsProps = {
   time: number;
@@ -20,14 +20,14 @@ export const PlayControls = ({ time, setTime }: PlayControlsProps) => {
       {/* Input logic extract to child component */}
       <fieldset className="flex gap-1">
         Current
-        <TimeInput
+        <NumberInputField
           dataTestid="time"
           min={0}
           max={2000}
           step={10}
           defaultValue={0}
           time={time}
-          onTimeChange={handleTimeChange}
+          onChange={handleTimeChange}
         />
       </fieldset>
       -

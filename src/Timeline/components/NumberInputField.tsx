@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-interface TimeInputProps {
+interface NumberInputField {
   dataTestid: string;
   min: number;
   max: number;
   step: number;
   defaultValue: number;
   time: number;
-  onTimeChange: (time: number) => void;
+  onChange: (time: number) => void;
 }
 
 const KEY = {
@@ -21,15 +21,15 @@ const roundIfDecimal = (value: number) => {
   return Number.isInteger(value) ? value : Math.round(value);
 };
 
-export const TimeInput = ({
+export const NumberInputField = ({
   dataTestid,
   min,
   max,
   step,
   time,
   defaultValue,
-  onTimeChange,
-}: TimeInputProps) => {
+  onChange,
+}: NumberInputField) => {
   const [draft, setDraft] = useState<string>(defaultValue.toString());
 
   const validateTime = (time: number): number => {
@@ -48,7 +48,7 @@ export const TimeInput = ({
     }
 
     const confirmTime = validateTime(Number(draft));
-    onTimeChange(confirmTime);
+    onChange(confirmTime);
     setDraft(confirmTime.toString());
   };
 
