@@ -15,7 +15,8 @@ export const Timeline = () => {
   const keyframeListRef = useRef<HTMLDivElement>(null);
   const trackListRef = useRef<HTMLDivElement>(null);
   
-  useSyncScroll(rulerRef, keyframeListRef, "horizontal");
+  
+  const { scrollLeft: rulerScrollLeft } = useSyncScroll(rulerRef, keyframeListRef, "horizontal");
   useSyncScroll(trackListRef, keyframeListRef, "vertical");
 
   return (
@@ -40,7 +41,7 @@ export const Timeline = () => {
         ref={keyframeListRef}
         duration={duration}
       />
-      <Playhead time={time} />
+      <Playhead time={time} rulerScrollLeft={rulerScrollLeft} />
     </div>
   );
 };
