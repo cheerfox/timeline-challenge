@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, useState, useEffect } from "react";
 import { roundToNearestStep } from "../utils";
 
 interface RulerProps {
@@ -11,34 +11,63 @@ export const Ruler = forwardRef(
   ({ duration, setTime }: RulerProps, ref: React.Ref<HTMLDivElement>) => {
     // TODO: implement mousedown and mousemove to update time and Playhead position
     const isDragging = useRef(false);
+    const isPressed = useRef(false);
+    const [mouseStartX, setMouseStartX] = useState(0);
+    const MOUSE_MOVE_THRESHOLD = 5;
+
+    useEffect(() => {
+      const handleGlobalMouseUp = () => {
+        isPressed.current = false;
+        isDragging.current = false;
+      };
+
+      window.addEventListener('mouseup', handleGlobalMouseUp);
+      return () => {
+        window.removeEventListener('mouseup', handleGlobalMouseUp);
+      };
+    }, []);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
       // TODO: make step to constants
 
       // prevent dragging to select text
       e.preventDefault();
-      isDragging.current = true;
+      isPressed.current = true;
+      setMouseStartX(e.nativeEvent.offsetX);
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
       if (
         e.relatedTarget instanceof HTMLElement &&
-        e.relatedTarget?.id === "playhead"
+        e.relatedTarget?.id === "playhead" &&
+        isPressed.current
       ) {
         return;
       }
       isDragging.current = false;
+      isPressed.current = false;
     };
 
+    
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isDragging.current) {
+      if (isPressed.current) {
+        const currentX = e.nativeEvent.offsetX;
+        if (Math.abs(currentX - mouseStartX) > MOUSE_MOVE_THRESHOLD) {
+          isDragging.current = true;
+        }
+      }
+      if (isPressed.current && isDragging.current) {
         setTime(roundToNearestStep(e.nativeEvent.offsetX, 10));
       }
     };
 
     const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (isDragging.current || isPressed.current) {
+        setTime(roundToNearestStep(e.nativeEvent.offsetX, 10));
+      }
+
       isDragging.current = false;
-      setTime(roundToNearestStep(e.nativeEvent.offsetX, 10));
+      isPressed.current = false;
     };
 
     return (
