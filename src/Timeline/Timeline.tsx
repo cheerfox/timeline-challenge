@@ -17,7 +17,7 @@ export const Timeline = () => {
       data-testid="timeline"
     >
       <PlayControls time={time} setTime={setTime} duration={duration} setDuration={setDuration} />
-      <Ruler />
+      <Ruler duration={duration} setTime={setTime} />
       <TrackList />
       <KeyframeList />
       <Playhead time={time} />

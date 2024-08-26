@@ -5,6 +5,7 @@ type PlayheadProps = {
 export const Playhead = ({ time }: PlayheadProps) => {
   return (
     <div
+      id="playhead"
       className="absolute left-[316px] h-full border-l-2 border-solid border-yellow-600 z-10"
       data-testid="playhead"
       style={{ transform: `translateX(calc(${time}px - 50%))` }}

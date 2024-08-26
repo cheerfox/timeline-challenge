@@ -101,7 +101,7 @@ export const NumberInputField = ({
 
   return (
     <input
-      className="bg-gray-700 px-1 rounded"
+      className="bg-gray-700 px-1 rounded w-[64px]"
       type="number"
       data-testid={dataTestid}
       min={min}
