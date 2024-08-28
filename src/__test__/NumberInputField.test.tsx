@@ -34,7 +34,7 @@ describe("NumberInputField", () => {
     expect(defaultProps.onChange).not.toHaveBeenCalled();
   });
 
-  it("Clicking outside the input field removes focus and changes the value", async () => {
+  it("clicking outside the input field removes focus and changes the value", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
 
     const input = screen.getByTestId("number-input-field");
@@ -48,7 +48,7 @@ describe("NumberInputField", () => {
     expect(defaultProps.onChange).toHaveBeenCalledWith(200);
   });
 
-  it("Pressing up arrow or down arrow keys immediately changes the value", async () => {
+  it("pressing up arrow or down arrow keys immediately changes the value", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -59,7 +59,7 @@ describe("NumberInputField", () => {
 
   });
 
-  it("Presssing Enter key immediately changes the value and unfocuses the input field", async () => {
+  it("presssing Enter key immediately changes the value and unfocuses the input field", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -68,7 +68,7 @@ describe("NumberInputField", () => {
     expect(input).not.toHaveFocus();
   });
 
-  it("Pressing Escape reverts to the original value and removes focus", async () => {
+  it("pressing Escape reverts to the original value and removes focus", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -77,7 +77,7 @@ describe("NumberInputField", () => {
     expect(input).toHaveValue(defaultProps.defaultValue);
   });
 
-  it("Leading zeros are automatically removed", async () => {
+  it("leading zeros are automatically removed", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -85,7 +85,7 @@ describe("NumberInputField", () => {
     expect(input).toHaveValue(300);
   });
 
-  it("Negative values are automatically adjusted to the minimum allowed value", async () => {
+  it("negative values are automatically adjusted to the minimum allowed value", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -93,7 +93,7 @@ describe("NumberInputField", () => {
     expect(input).toHaveValue(defaultProps.min);
   });
 
-  it("Decimal values are automatically rounded to the nearest integer and nearest step", async () => {
+  it("decimal values are automatically rounded to the nearest integer and nearest step", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 
@@ -104,7 +104,7 @@ describe("NumberInputField", () => {
     expect(input).toHaveValue(20);
   });
 
-  it("Invalid inputs (non-numeric) revert to the previous valid value", async () => {
+  it("invalid inputs (non-numeric) revert to the previous valid value", async () => {
     const { user } = setup(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input-field");
 

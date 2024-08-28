@@ -43,7 +43,7 @@ describe("PlayControls", () => {
     expect(currentTimeInput).toHaveValue(500);
   });
 
-  it("Duration is always between 100ms and 6000ms", async () => {
+  it("duration is always between 100ms and 6000ms", async () => {
     const { user } = setup(<PlayControls {...defaultProps} />);
     const durationInput = screen.getByTestId("max-time");
 

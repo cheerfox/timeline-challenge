@@ -15,7 +15,7 @@ describe("Timeline", () => {
     expect(screen.getByTestId("timeline")).toBeInTheDocument();
   });
 
-  it("Ruler length visually represents the total Duration", async () => {
+  it("ruler length visually represents the total Duration", async () => {
     const { user } = setup(<Timeline />);
     const rulerBar = screen.getByTestId("ruler-bar");
     const durationInput = screen.getByTestId("max-time");
@@ -24,7 +24,7 @@ describe("Timeline", () => {
     expect(rulerBar).toHaveStyle({ width: "1000px" });
   });
 
-  it("Playhead moves when current time is changed", async () => {
+  it("playhead moves when current time is changed", async () => {
     const { user } = setup(<Timeline />);
     const playhead = screen.getByTestId("playhead");
     const currentTimeInput = screen.getByTestId("time");
@@ -32,7 +32,7 @@ describe("Timeline", () => {
     expect(playhead).toHaveStyle({ transform: "translateX(calc(300px - 50%))" });
   });
 
-  it("Clicking on the Ruler updates the Current Time and Playhead position", async () => {
+  it("clicking on the Ruler updates the Current Time and Playhead position", async () => {
     setup(<Timeline />);
     const ruler = screen.getByTestId("ruler");
     const playhead = screen.getByTestId("playhead");
@@ -42,7 +42,7 @@ describe("Timeline", () => {
     expect(playhead.style.transform).toBe('translateX(calc(100px - 50%))');
   });
 
-  it("Vertical scrolling of the Track List is synchronized with the Keyframe List", async () => {
+  it("vertical scrolling of the Track List is synchronized with the Keyframe List", async () => {
     setup(<Timeline />);
     const trackList = screen.getByTestId("track-list");
     const keyframeList = screen.getByTestId("keyframe-list");
@@ -51,7 +51,7 @@ describe("Timeline", () => {
     expect(keyframeList.scrollTop).toBe(100);
   });
 
-  it("Vertical scrolling of Keyframe List is synchronized with the Track List", async () => {
+  it("vertical scrolling of Keyframe List is synchronized with the Track List", async () => {
     setup(<Timeline />);
     const trackList = screen.getByTestId("track-list");
     const keyframeList = screen.getByTestId("keyframe-list");
@@ -60,7 +60,7 @@ describe("Timeline", () => {
     expect(trackList.scrollTop).toBe(300);
   });
 
-  it("Horizontal scrolling of Keyframe List is synchronized with the Ruler", async () => {
+  it("horizontal scrolling of Keyframe List is synchronized with the Ruler", async () => {
     setup(<Timeline />);
     const ruler = screen.getByTestId("ruler");
     const keyframeList = screen.getByTestId("keyframe-list");
@@ -69,7 +69,7 @@ describe("Timeline", () => {
     expect(ruler.scrollLeft).toBe(100);
   });
 
-  it("Horizontal scrolling of Ruler is synchronized with the Keyframe List", async () => {
+  it("horizontal scrolling of Ruler is synchronized with the Keyframe List", async () => {
     setup(<Timeline />);
     const ruler = screen.getByTestId("ruler");
     const keyframeList = screen.getByTestId("keyframe-list");
