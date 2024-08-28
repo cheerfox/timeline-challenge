@@ -1,5 +1,13 @@
 import { useEffect } from "react";
 import { NumberInputField } from "./components/NumberInputField";
+import {
+  RULER_STEP,
+  DURATION_DEFAULT,
+  DURATION_MIN,
+  DURATION_MAX,
+  TIME_DEFAULT,
+  TIME_MIN,
+} from "../utils/contanst";
 
 type PlayControlsProps = {
   time: number;
@@ -8,7 +16,12 @@ type PlayControlsProps = {
   setDuration: (duration: number) => void;
 };
 
-export const PlayControls = ({ time, setTime, duration, setDuration }: PlayControlsProps) => {
+export const PlayControls = ({
+  time,
+  setTime,
+  duration,
+  setDuration,
+}: PlayControlsProps) => {
   // TODO: implement time <= maxTime
   const handleTimeChange = (time: number) => {
     setTime(time);
@@ -20,7 +33,6 @@ export const PlayControls = ({ time, setTime, duration, setDuration }: PlayContr
 
   useEffect(() => {
     if (time > duration) {
-      
       setTime(duration);
     }
   }, [time, duration, setTime]);
@@ -36,10 +48,10 @@ export const PlayControls = ({ time, setTime, duration, setDuration }: PlayContr
         Current
         <NumberInputField
           dataTestid="time"
-          min={0}
+          min={TIME_MIN}
           max={duration}
-          step={10}
-          defaultValue={0}
+          step={RULER_STEP}
+          defaultValue={TIME_DEFAULT}
           time={time}
           onChange={handleTimeChange}
         />
@@ -48,10 +60,10 @@ export const PlayControls = ({ time, setTime, duration, setDuration }: PlayContr
       <fieldset className="flex gap-1">
         <NumberInputField
           dataTestid="max-time"
-          min={100}
-          max={6000}
-          step={10}
-          defaultValue={2000}
+          min={DURATION_MIN}
+          max={DURATION_MAX}
+          step={RULER_STEP}
+          defaultValue={DURATION_DEFAULT}
           time={duration}
           onChange={handleDurationChange}
         />

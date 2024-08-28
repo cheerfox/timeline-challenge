@@ -1,4 +1,5 @@
 import { roundToNearestStep } from "../utils";
+import { RULER_STEP } from "../utils/contanst";
 
 type PlayheadProps = {
   time: number;
@@ -6,7 +7,7 @@ type PlayheadProps = {
 };
 
 export const Playhead = ({ time, rulerScrollLeft }: PlayheadProps) => {
-  const playheadPosition = roundToNearestStep(time - rulerScrollLeft, 10);
+  const playheadPosition = roundToNearestStep(time - rulerScrollLeft, RULER_STEP);
   
   return (
     <div

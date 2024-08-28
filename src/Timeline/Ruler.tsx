@@ -1,12 +1,12 @@
 import { forwardRef, useRef, useState, useEffect } from "react";
 import { roundToNearestStep } from "../utils";
+import { RULER_STEP } from "../utils/contanst";
 
 interface RulerProps {
   duration: number;
   setTime: (time: number) => void;
 }
 
-// TODO: 還是有機會 mouseleave 的時候沒有 reset isDragging，還要測試
 export const Ruler = forwardRef(
   ({ duration, setTime }: RulerProps, ref: React.Ref<HTMLDivElement>) => {
     // TODO: implement mousedown and mousemove to update time and Playhead position
@@ -28,8 +28,6 @@ export const Ruler = forwardRef(
     }, []);
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-      // TODO: make step to constants
-
       // prevent dragging to select text
       e.preventDefault();
       isPressed.current = true;
@@ -57,13 +55,13 @@ export const Ruler = forwardRef(
         }
       }
       if (isPressed.current && isDragging.current) {
-        setTime(roundToNearestStep(e.nativeEvent.offsetX, 10));
+        setTime(roundToNearestStep(e.nativeEvent.offsetX, RULER_STEP));
       }
     };
 
     const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
       if (isDragging.current || isPressed.current) {
-        setTime(roundToNearestStep(e.nativeEvent.offsetX, 10));
+        setTime(roundToNearestStep(e.nativeEvent.offsetX, RULER_STEP));
       }
 
       isDragging.current = false;

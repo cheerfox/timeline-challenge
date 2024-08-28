@@ -5,11 +5,12 @@ import { TrackList } from "./TrackList";
 import { KeyframeList } from "./KeyframeList";
 import { PlayControls } from "./PlayControls";
 import { useSyncScroll } from "../hooks/useSyncScroll";
+import { DURATION_DEFAULT, TIME_DEFAULT } from "../utils/contanst";
 
 export const Timeline = () => {
   // FIXME: performance concerned
-  const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(2000);
+  const [time, setTime] = useState(TIME_DEFAULT);
+  const [duration, setDuration] = useState(DURATION_DEFAULT);
 
   const rulerRef = useRef<HTMLDivElement>(null);
   const keyframeListRef = useRef<HTMLDivElement>(null);
