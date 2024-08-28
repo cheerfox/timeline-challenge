@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { roundIfDecimal, roundToNearestStep } from "../../utils";
 
+
 interface NumberInputField {
   dataTestid: string;
   min: number;
@@ -18,6 +19,32 @@ const KEY = {
   ESCAPE: "Escape",
 };
 
+/**
+ * NumberInputField component
+ * 
+ * A customizable number input field with validation and keyboard navigation.
+ * 
+ * @component
+ * @param {Object} props - The component props
+ * @param {string} props.dataTestid - The data-testid attribute for testing
+ * @param {number} props.min - The minimum allowed value of the input
+ * @param {number} props.max - The maximum allowed value of the input
+ * @param {number} props.step - The step of the input
+ * @param {number} props.defaultValue - The initial value of the input
+ * @param {number} props.time - The current time value from Timeline component
+ * @param {function} props.onChange - Callback function when the value changes
+ * 
+ * @example
+ * <NumberInputField
+ *   dataTestid="time-input"
+ *   min={0}
+ *   max={100}
+ *   step={1}
+ *   defaultValue={50}
+ *   time={50}
+ *   onChange={(newTime) => console.log(newTime)}
+ * />
+ */
 export const NumberInputField = ({
   dataTestid,
   min,

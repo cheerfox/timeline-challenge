@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react"
 
+/**
+ * useSyncScroll hook
+ * 
+ * This hook synchronizes the scroll position of two HTMLDivElements.
+ * It allows for horizontal, vertical, or both directions of synchronization.
+ * 
+ * @param {React.RefObject<HTMLDivElement>} refOne - Reference to the first div element
+ * @param {React.RefObject<HTMLDivElement>} refTwo - Reference to the second div element
+ * @param {"horizontal" | "vertical" | "both"} syncMode - The direction of synchronization
+ * 
+ * @returns {Object} - An object containing the scrollLeft and scrollTop values
+ * 
+ */
 export const useSyncScroll = (
   refOne: React.RefObject<HTMLDivElement>,
   refTwo: React.RefObject<HTMLDivElement>,
