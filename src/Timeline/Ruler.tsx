@@ -83,6 +83,7 @@ export const Ruler = forwardRef(
         onMouseLeave={handleMouseLeave}
       >
         <div
+          data-testid="ruler-bar"
           className="w-[2000px] h-6 rounded-md bg-white/25"
           style={{ width: `${duration}px` }}
         ></div>
