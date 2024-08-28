@@ -1,5 +1,16 @@
 # Phase Timeline Challenge
 
+## How to run
+
+```bash
+npm install
+npm start // run dev server
+npm test // run tests
+```
+
+## Notes
+- 直接 run npm test 會有一些 test 是 fail，但實際在 browser 上操作是正常的，有可能是因為目前的某些功能的實作方式在 jsDom 裡面沒辦法正常觸發，有機會是要調整 test 的寫法，或是調整實作方式。
+
 ## Overview
 
 Implement interactive features for a Timeline component. We will provide a basic Timeline component scaffold, and your task is to implement the functionality that meets the user behavior requirements outlined below.
